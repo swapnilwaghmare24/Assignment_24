@@ -3,6 +3,8 @@ package com.bridgelabz.addressbook;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AddressBookService {
     Map<String,AddressBook> addressBookMap=new HashMap<>();
@@ -101,7 +103,7 @@ public class AddressBookService {
         viewCityState(viewLocation, viewChoice);
     }
     public void viewCityState(String location, String choice) {
-        addressBookMap.values().stream().forEach((adBook) -> {
+        for (AddressBook adBook : addressBookMap.values()) {
             adBook.contactList.stream().filter(contact -> {
 
                         if (choice.equalsIgnoreCase("city"))
@@ -110,7 +112,7 @@ public class AddressBookService {
                             return contact.getState().equalsIgnoreCase(location);
                     })
                     .forEach(contact -> System.out.println(contact));
-        });
+        }
 
     }
     public void countByContacts(){
@@ -139,6 +141,12 @@ public class AddressBookService {
         }
 
         System.out.println(" Total count: " + finalCount);
+    }
+    public void sortByName()
+    {
+        for (AddressBook adBook : addressBookMap.values()) {
+            adBook.contactList.stream().sorted((n1,n2)->n1.getFirstName().compareTo(n2.getFirstName())).forEach(System.out::println);
+        }
     }
 
 }
