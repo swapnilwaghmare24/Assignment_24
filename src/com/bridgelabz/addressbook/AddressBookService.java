@@ -148,5 +148,11 @@ public class AddressBookService {
             adBook.contactList.stream().sorted((n1,n2)->n1.getFirstName().compareTo(n2.getFirstName())).forEach(System.out::println);
         }
     }
+    public void sortByCity()
+    {
+        for (AddressBook adBook : addressBookMap.values()) {
+            adBook.contactList.stream().sorted((c1,c2)->c1.getCity().compareTo(c2.getCity())).forEach(System.out::println);
+        }
+    }
 
 }
